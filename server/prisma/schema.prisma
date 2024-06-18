@@ -32,7 +32,7 @@ model Student {
 //make a model for the books with the fields id,name,author,publisher,publicationYear,subject
 model Book {
   id              String   @id @default(cuid())
-  name            String
+  name            String   @unique
   author          String
   publisher       String
   publicationYear Int

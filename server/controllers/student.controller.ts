@@ -11,7 +11,7 @@ export const registerStudent = async (req: Request, res: Response) => {
     }
     try {
         const hashedPassword = hashSync(password, 10);
-        const newBook = await prisma.student.create({
+        const student = await prisma.student.create({
             data: {
                 firstName,
                 lastName,
@@ -19,7 +19,7 @@ export const registerStudent = async (req: Request, res: Response) => {
                 password: hashedPassword
             }
         })
-        return createSuccessResponse("Student created Successfully", newBook, res)
+        return createSuccessResponse("Student created Successfully", student, res)
     }
     catch (err) {
         return serverErrorResponse(err, res)
