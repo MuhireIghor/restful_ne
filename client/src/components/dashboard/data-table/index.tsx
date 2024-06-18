@@ -281,7 +281,7 @@ export function DataTable({
                         size="xs"
                         // label="Your favorite library"
                         placeholder="Pick Page Size"
-                        data={[5, 10, 20, 30, 40, 50].map((val) => String(`${val}`))}
+                        data={[1,2,3,4,5, 10, 20, 30, 40, 50].map((val) => String(`${val}`))}
                         value={
                             isPaginated
                                 ? String(paginationProps?.paginateOpts?.limit ?? 0)
