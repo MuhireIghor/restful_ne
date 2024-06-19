@@ -1,4 +1,5 @@
 import swaggerAutogen from "swagger-autogen";
+//swagger generator configurations
 const doc = {
     info: {
         version: '1.0.0',

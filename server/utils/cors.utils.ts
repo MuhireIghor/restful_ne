@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+//Added cors configuration
 /**
  * 
  * @param req this is the request object
@@ -6,7 +7,7 @@ import { NextFunction, Request, Response } from "express";
  * @param next this is the next callback function
  */
 export function corsFunction(req: Request, res: Response, next: NextFunction) {
-    const allowedOrigins = ['http://10.5.221.135:3000'];
+    const allowedOrigins = ['http://10.5.220.228:3000'];
     const origin = req.headers.origin;
     if (allowedOrigins.indexOf(origin!) >= 0) {
         res.setHeader('Access-Control-Allow-Origin', origin!);

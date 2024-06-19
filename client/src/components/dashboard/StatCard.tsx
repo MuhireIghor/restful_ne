@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-import { GrowthIcon } from '@/components/icons';
 
 interface Props {
     title: string;
@@ -17,7 +16,6 @@ const StatCard = (props: Props) => {
                 className={`flex items-center ${props.bgColor ?? 'bg-[#0f0]/30'} justify-center rounded-full w-16 h-16 ${props.tColor ?? 'text-green-700'
                     }`}
             >
-                {props.icon ?? <GrowthIcon />}
             </div>
             <div className="flex flex-col">
                 <span className=" text-gray-500">{props.title}</span>

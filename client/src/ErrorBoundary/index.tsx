@@ -1,5 +1,6 @@
 import React from 'react';
 import { MdErrorOutline } from 'react-icons/md';
+//Added the error boundary component to handle errors in the application
 class ErrorBoundary extends React.Component<
    { children: React.ReactNode },
    {

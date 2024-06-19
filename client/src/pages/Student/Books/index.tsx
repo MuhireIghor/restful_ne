@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineReload } from "react-icons/ai";
 
 const StudentBooksComponent = () => {
-    const { deleteData, loading: deleteLoading } = useDelete("/employee/delete");
+    // State and data fetching logic using custom hook
     const {
         data: employees,
         get,
@@ -25,11 +25,13 @@ const StudentBooksComponent = () => {
         defaultData: [],
     });
 
-
+    // State for controlling viewBook modal
     const [viewBook, setViewBook] = useState({
         opened: false,
         data: null as IBook | null
     })
+
+    // Column definitions for DataTable component
     const columns: ColumnDef<IBook>[] = [
         {
             header: "Author",
@@ -83,7 +85,9 @@ const StudentBooksComponent = () => {
 
         >
             <div className="flex w-full flex-col p-3">
+                {/* Display loading skeleton while data is loading */}
                 {loading && <TableSkeleton columns={columns} />}
+                {/* Display error message and retry button on error */}
                 {error && (
                     <div className="flex flex-col items-center w-full">
                         <span className="flex items-center justify-center text-red-700 text-sm">
@@ -103,14 +107,18 @@ const StudentBooksComponent = () => {
                         </Button>
                     </div>
                 )}
+                 {/* Display message when no data is available */}
                 {!loading && !error && employees?.length == 0 && (
                     <EmptyView message="No Data To show" />
                 )}
+                {/* Display DataTable when data is available */}
 
                 {!loading && !error && (
                     <DataTable searchKey="name" columns={columns} data={employees} />
                 )}
             </div>
+
+            {/* Drawer component for displaying detailed view of a book */}
 
             <Drawer
                 opened={viewBook.opened}

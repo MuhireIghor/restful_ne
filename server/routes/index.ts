@@ -3,6 +3,7 @@ import authRoute from "./auth.route";
 import bookRoute from "./book.route";
 import studentRoute from "./student.route";
 const route = express.Router();
+//Middleware for handling /auth routes
 route.use("/auth", authRoute
     /*
 #swagger.tags = ['Auth']
@@ -10,6 +11,7 @@ route.use("/auth", authRoute
     "bearerAuth": []
     }] 
     */)
+//Middleware for handling /books routes
 route.use("/books", bookRoute
     /*
 #swagger.tags = ['Book']
@@ -17,6 +19,7 @@ route.use("/books", bookRoute
     "bearerAuth": []
     }] 
     */)
+//Middleware for handling /student routes
 route.use("/student", studentRoute
     /*
 #swagger.tags = ['Student']

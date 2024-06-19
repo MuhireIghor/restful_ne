@@ -1,40 +1,25 @@
 /* eslint-disable react-refresh/only-export-components */
-import { INotification } from "@/types/base.type";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import React, { useContext, useEffect } from "react";
-
+//Added the Appprovider context provider
 interface AppContextProps {
   showRight: boolean;
   setShowRight: (show: boolean) => void;
-  notifications: INotification[];
-  setNotifications: (notifications: any) => void;
-  unreadNotifications: INotification[];
-  setUnreadNotifications: (notifications: any) => void;
 }
 
 const AppContext = React.createContext<AppContextProps>({
   showRight: false,
   setShowRight: () => {},
-  notifications: [],
-  setNotifications: () => {},
-  unreadNotifications: [],
-  setUnreadNotifications: () => {},
 });
 
 export const useApp = () => useContext(AppContext);
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [showRight, setShowRight] = React.useState(false);
-  const [notifications, setNotifications] = React.useState<INotification[]>([]);
-  const [unreadNotifications, setUnreadNotifications] = React.useState<
-    INotification[]
-  >([]);
 
-  useEffect(() => {
-    const unread = notifications.filter((item) => !item.read);
-    setUnreadNotifications(unread);
-  }, [notifications]);
+
+
 
   return (
     <MantineProvider
@@ -61,10 +46,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
         value={{
           showRight,
           setShowRight,
-          notifications,
-          setNotifications,
-          unreadNotifications,
-          setUnreadNotifications,
+   
         }}
       >
         {children}

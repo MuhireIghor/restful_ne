@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { errorResponse } from "../utils/response.utils";
+//implemented new student validation middleware
 export async function validateStudentRegistration(req, res, next) {
     try {
       const schema = Joi.object({
@@ -10,14 +11,14 @@ export async function validateStudentRegistration(req, res, next) {
       });
   
       const { error } = schema.validate(req.body);
-      if (error) return errorResponse(error.message, res);
+      if (error) return errorResponse(error.details[0].message, res);
   
       return next();
     } catch (ex:any) {
       return errorResponse(ex.message, res);
     }
   }
-  
+  //implemented login validation middleware
   export async function validateLogin(req, res, next) {
     try {
       const schema = Joi.object({
@@ -26,7 +27,7 @@ export async function validateStudentRegistration(req, res, next) {
       });
   
       const { error } = schema.validate(req.body);
-      if (error) return errorResponse(error.message, res);
+      if (error) return errorResponse(error.details[0].message, res);
   
       return next();
     } catch (ex:any) {

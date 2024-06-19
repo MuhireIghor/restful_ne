@@ -1,3 +1,5 @@
+//The nothing found view to render when no data is found for table data
+
 export default function EmptyView({
     message,
     minHeight,

@@ -1,4 +1,3 @@
-"use client";
 import { useAuth } from "@/contexts/AuthProvider";
 import { ActionIcon, Avatar, Badge } from "@mantine/core";
 import { LogOutIcon, MenuIcon } from "lucide-react";
@@ -12,7 +11,6 @@ const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const { user } = useAuth();
   const pathname = useLocation().pathname;
-  const { unreadNotifications } = useApp();
 
   useEffect(() => {
     setPath(pathname);

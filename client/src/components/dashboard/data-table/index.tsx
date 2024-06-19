@@ -225,6 +225,7 @@ export function DataTable({
                 </div>
             </div>
             <div className="flex w-full justify-center">
+                {/* Added the pagination component */}
                 <Pagination
                     total={
                         isPaginated

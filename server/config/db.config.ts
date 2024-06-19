@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+//prisma client instance with db connection function
 
 const prisma = new PrismaClient();
 const checkDbConnection = async () => {

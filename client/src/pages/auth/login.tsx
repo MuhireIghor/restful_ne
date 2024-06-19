@@ -6,6 +6,8 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { api, getResError } from "@/utils/fetcher";
 import { notifications } from "@mantine/notifications";
 import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Resolver, useForm } from "react-hook-form";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
@@ -17,11 +19,20 @@ export default function Login() {
     email: string;
     password: string;
   }
+  const validationSchema = yup.object({
+    email: yup.string().email("Email is invalid").required("Email is required"),
+    password: yup.string()
 
 
-  const login = async (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Login", data);
+  })
+
+  const { register, handleSubmit, formState: { errors } } = useForm<loginInput>({
+    resolver: yupResolver(validationSchema) as Resolver<loginInput>,
+    mode: "onTouched"
+  })
+
+  const login = async (data: any) => {
+
     setLoading(true);
     try {
       const res = await api.post("/auth/login", data);
@@ -33,7 +44,7 @@ export default function Login() {
           color: "green",
           autoClose: 3000,
         });
-        console.log(res.data,"Respomse====")
+        console.log(res.data, "Respomse====")
         const user = res.data.data?.student;
         sessionStorage.setItem("token", res.data.data?.token);
         sessionStorage.setItem("user", JSON.stringify(user));
@@ -72,7 +83,7 @@ export default function Login() {
 
   if (token) {
 
-    return <Navigate to="/user/documents" />;
+    return <Navigate to="/account" />;
   }
 
   return (
@@ -91,7 +102,7 @@ export default function Login() {
           </header>
 
           <div className="mt-12 scale-90">
-            <form onSubmit={login}>
+            <form onSubmit={handleSubmit(login)}>
               <div className="field flex flex-col gap-2 mt-6">
                 <label
                   htmlFor="email"
@@ -100,13 +111,14 @@ export default function Login() {
                   Email Address
                 </label>
                 <input
-                  onChange={(e) => setData({ ...data, email: e.target.value })}
                   className="outline-none border-none text-black-primary h-[50px] bg-input text-sm px-4 boder border-transparent rounded-[10px] active:border-gray-600"
                   type="text"
-                  name=""
                   placeholder="example@gmail.com"
                   id="email"
+                  {...register("email")}
                 />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+
               </div>
 
               <div className="field flex flex-col gap-2 mt-6 relative">
@@ -117,15 +129,14 @@ export default function Login() {
                   Password
                 </label>
                 <input
-                  onChange={(e) =>
-                    setData({ ...data, password: e.target.value })
-                  }
+
                   className="outline-none border-none text-black-primary h-[50px] bg-input text-sm px-4 boder border-transparent rounded-[10px] active:border-gray-600"
                   type={showPassword ? "text" : "password"}
-                  name=""
                   placeholder="*********"
                   id="password"
+                  {...register("password")}
                 />
+                {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                 <div className="absolute right-3 bottom-4">
                   {!showPassword ? (
                     <AiFillEyeInvisible
@@ -139,6 +150,7 @@ export default function Login() {
                     />
                   )}
                 </div>
+
               </div>
 
               <div className="mt-6 flex items-center justify-between">
@@ -185,7 +197,7 @@ export default function Login() {
                   </a>{" "}
                 </p>
               </div>
-   
+
             </form>
           </div>
         </div>

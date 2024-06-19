@@ -35,7 +35,7 @@ app.use('*', async (req: Request, res: Response) => {
 let server:any;
 checkDbConnection().then(()=>{
     server = app.listen(port, () => {
-        logger.info(`Server running on port ${port} in ${process.env.NODE_ENV} environment`)
+        logger.info(`Server running on port ${port} `)
     })
 })
 .catch((error) => {

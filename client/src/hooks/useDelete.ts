@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/types/base.type";
-import { AuthAPi, getResError } from "@/utils/fetcher";
+import { AuthApi, getResError } from "@/utils/fetcher";
 import { notifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";
 
@@ -22,7 +22,7 @@ export default function useDelete<T = any>(url: string, _options?: Opts) {
       return;
     }
     try {
-      const response = await AuthAPi.delete<ApiResponse<T>>(`${url}/${id}`);
+      const response = await AuthApi.delete<ApiResponse<T>>(`${url}/${id}`);
       console.log(response);
       notifications.show({
         title: "Success",
